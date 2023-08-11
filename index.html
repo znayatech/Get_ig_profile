@@ -1,0 +1,31 @@
+DOCTYPE html>
+<html>
+<head>
+    <title>Instagram Profile Info</title>
+</head>
+<body>
+    <h1>Instagram Profile Info</h1>
+    <input type="text" id="username" placeholder="Enter Instagram Username">
+    <button id="getInfo">Get Profile Info</button>
+    <div id="result"></div>
+
+    <script>
+        const button = document.getElementById('getInfo');
+        const resultDiv = document.getElementById('result');
+
+        button.addEventListener('click', async () => {
+            const username = document.getElementById('username').value;
+            const response = await fetch(`/get_info?username=${username}`);
+            const data = await response.json();
+            resultDiv.innerHTML = `
+                <p>Username: ${data.username}</p>
+                <p>User ID: ${data.userid}</p>
+                <p>Number of Posts: ${data.mediacount}</p>
+                <p>Followers: ${data.followers}</p>
+                <p>Followees: ${data.followees}</p>
+                <p>Bio: ${data.biography}</p>
+            `;
+        });
+    </script>
+</body>
+  </html>
